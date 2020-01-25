@@ -1,7 +1,8 @@
+
+
 $(document).ready(function () {
-  var right = 0;
-  var wrong = 0;
-  var secondsLeft = 60;
+  var score = 0;
+  var secondsLeft = 75;
   var timer = document.getElementById('timer');
 
   var questionsChoices =
@@ -28,8 +29,13 @@ $(document).ready(function () {
   };
 
   $('#questions').hide();
+  $('#game-over').hide();
 
-
+  function stopTimer() {
+    clearInterval(interval);
+    // $('#questions').hide();
+    $('#timer').hide();
+  }
 
 
   function startTime() {
@@ -101,7 +107,7 @@ $(document).ready(function () {
 
     $('.choices .list-design-1').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsTwo();
       renderAnswersTwo();
 
@@ -112,14 +118,14 @@ $(document).ready(function () {
 
     $('.choices .list-design-2').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsTwo();
       renderAnswersTwo();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      right = right + 1;
+      score++;
       renderQuestionsTwo();
       renderAnswersTwo();
 
@@ -127,7 +133,7 @@ $(document).ready(function () {
 
     $('.choices .list-design-4').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsTwo();
       renderAnswersTwo();
     })
@@ -143,7 +149,7 @@ $(document).ready(function () {
     }
     $('.choices .list-design-1').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsThree();
       renderAnswersThree();
 
@@ -152,14 +158,14 @@ $(document).ready(function () {
 
     $('.choices .list-design-2').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsThree();
       renderAnswersThree();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      right++;
+      score++;
       renderQuestionsThree();
       renderAnswersThree();
 
@@ -170,7 +176,7 @@ $(document).ready(function () {
 
     $('.choices .list-design-4').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsThree();
       renderAnswersThree();
 
@@ -188,7 +194,7 @@ $(document).ready(function () {
     }
     $('.choices .list-design-1').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFour();
       renderAnswersFour();
 
@@ -197,14 +203,14 @@ $(document).ready(function () {
 
     $('.choices .list-design-2').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFour();
       renderAnswersFour();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      right++;
+      score++;
       renderQuestionsFour();
       renderAnswersFour();
 
@@ -215,7 +221,7 @@ $(document).ready(function () {
 
     $('.choices .list-design-4').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFour();
       renderAnswersFour();
 
@@ -233,7 +239,7 @@ $(document).ready(function () {
     }
     $('.choices .list-design-1').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFive();
       renderAnswersFive();
 
@@ -242,14 +248,14 @@ $(document).ready(function () {
 
     $('.choices .list-design-2').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFive();
       renderAnswersFive();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      right++;
+      score++;
       renderQuestionsFive();
       renderAnswersFive();
 
@@ -260,7 +266,7 @@ $(document).ready(function () {
 
     $('.choices .list-design-4').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
       renderQuestionsFive();
       renderAnswersFive();
 
@@ -276,22 +282,43 @@ $(document).ready(function () {
       $('.choices .list-design-3').text(questionsChoices.choices5[2]);
       $('.choices .list-design-4').text(questionsChoices.choices5[3]);
     }
-    $('.choices .list-design-1').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
-      wrong++;
+    $('.choices .list-design-1').on('click', function (event) {
 
+      // secondsLeft = secondsLeft - 15;
+      score--;
+      $('#game-over').show();
+      $('#questions').hide();
+      var initialHigh = localStorage.getItem('highscore');
+      if (score > initialHigh) {
+        localStorage.setItem('highscore', score);
+      }
+
+      stopTimer();
 
     })
 
     $('.choices .list-design-2').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
-
+      score--;
+      $('#game-over').show();
+      $('#questions').hide();
+      var initialHigh = localStorage.getItem('highscore');
+      if (score > initialHigh) {
+        localStorage.setItem('highscore', score);
+      }
+      stopTimer();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      right++;
+      score++;
+      $('#game-over').show();
+      $('#questions').hide();
+      var initialHigh = localStorage.getItem('highscore');
+      if (score > initialHigh) {
+        localStorage.setItem('highscore', score);
+      }
+      stopTimer();
 
 
 
@@ -301,8 +328,15 @@ $(document).ready(function () {
 
     $('.choices .list-design-4').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      wrong++;
+      score--;
+      $('#game-over').show();
+      $('#questions').hide();
+      var initialHigh = localStorage.getItem('highscore');
+      if (score > initialHigh) {
+        localStorage.setItem('highscore', score);
 
+      }
+      stopTimer();
     })
 
 
@@ -311,9 +345,23 @@ $(document).ready(function () {
 
 
 
+  $('#initial-form').on('submit', function (event) {
+    // event.preventDefault();
+    console.log('worked');
+    event.preventDefault();
+
+
+    var inputValue = (this).value;
+    localStorage.setItem('initials', inputValue);
+    (this).reset();
+  })
 
 
   $('#button-start').on("click", startQuiz);
+
+
+
+
 
 
 
