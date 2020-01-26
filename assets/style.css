@@ -20,9 +20,17 @@ body {
     background-color: thistle;
 }
 
-#question {
+#question, #question2, #question3, #question4, #question5 {
     color: blanchedalmond;
 }
+
+/* #question2 {
+    color: blanchedalmond;
+}
+
+#question3 {
+    color: blanchedalmond;
+} */
 
 .list-size {
     font-size: 20px;
@@ -42,4 +50,8 @@ body {
 #input-size {
     width: 65px;
     ;
+}
+
+.wrongInput {
+    background-color: red;
 }

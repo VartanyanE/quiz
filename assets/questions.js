@@ -4,6 +4,10 @@ $(document).ready(function () {
   var score = 0;
   var secondsLeft = 75;
   var timer = document.getElementById('timer');
+  $('#stored-initials').text(localStorage.getItem('initials'));
+  $('#button-restart').hide();
+
+
 
   var questionsChoices =
   {
@@ -29,12 +33,18 @@ $(document).ready(function () {
   };
 
   $('#questions').hide();
+  $('#questions2').hide();
+  $('#questions3').hide();
+  $('#questions4').hide();
+  $('#questions5').hide();
   $('#game-over').hide();
 
   function stopTimer() {
     clearInterval(interval);
     // $('#questions').hide();
     $('#timer').hide();
+    secondsLeft = 75;
+    $('#button-restart').hide();
   }
 
 
@@ -46,7 +56,12 @@ $(document).ready(function () {
       if (secondsLeft <= 0) {
         clearInterval(interval);
         $('#questions').hide();
+        $('#questions2').hide();
+        $('#questions3').hide();
+        $('#questions4').hide();
+        $('#questions5').hide();
         $('#timer').hide();
+        $('#game-over').show();
 
 
       }
@@ -57,11 +72,25 @@ $(document).ready(function () {
 
 
   function startQuiz() {
+
     startTime();
     $('#button-start').hide();
     $('.jumbo-class').hide();
 
     $('#questions').show();
+
+
+    renderQuestions();
+    renderAnswers();
+  }
+
+  function restartQuiz() {
+    stopTimer();
+    startTime();
+    $('#button-start').hide();
+    $('.jumbo-class').hide();
+    $('#questions').show();
+    $('#game-over').hide();
 
 
     renderQuestions();
@@ -74,24 +103,24 @@ $(document).ready(function () {
 
   }
   function renderQuestionsTwo() {
-    $('#question').html('<h3>' + questionsChoices.title2 + '<h3>');
+    $('#question2').html('<h3>' + questionsChoices.title2 + '<h3>');
 
   }
 
   function renderQuestionsThree() {
-    $('#question').html('<h3>' + questionsChoices.title3 + '<h3>');
+    $('#question3').html('<h3>' + questionsChoices.title3 + '<h3>');
 
 
   }
 
   function renderQuestionsFour() {
-    $('#question').html('<h3>' + questionsChoices.title4 + '<h3>');
+    $('#question4').html('<h3>' + questionsChoices.title4 + '<h3>');
 
 
   }
 
   function renderQuestionsFive() {
-    $('#question').html('<h3>' + questionsChoices.title5 + '<h3>');
+    $('#question5').html('<h3>' + questionsChoices.title5 + '<h3>');
 
 
   }
@@ -106,10 +135,14 @@ $(document).ready(function () {
 
 
     $('.choices .list-design-1').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsTwo();
       renderAnswersTwo();
+      $('#questions').hide();
+      $('#questions2').show();
+
+
 
 
 
@@ -117,10 +150,12 @@ $(document).ready(function () {
     })
 
     $('.choices .list-design-2').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsTwo();
       renderAnswersTwo();
+      $('#questions').hide();
+      $('#questions2').show();
     })
 
     $('.choices .list-design-3').on('click', function () {
@@ -128,57 +163,70 @@ $(document).ready(function () {
       score++;
       renderQuestionsTwo();
       renderAnswersTwo();
+      $('#questions').hide();
+      $('#questions2').show();
+
 
     })
 
     $('.choices .list-design-4').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsTwo();
       renderAnswersTwo();
+      $('#questions').hide();
+      $('#questions2').show();
     })
 
 
   }
   function renderAnswersTwo() {
     for (let i = 0; i < questionsChoices.choices.length; i++) {
-      $('.choices .list-design-1').text(questionsChoices.choices2[0]);
-      $('.choices .list-design-2').text(questionsChoices.choices2[1]);
-      $('.choices .list-design-3').text(questionsChoices.choices2[2]);
-      $('.choices .list-design-4').text(questionsChoices.choices2[3]);
+      $('.choices .list-design-5').text(questionsChoices.choices2[0]);
+      $('.choices .list-design-6').text(questionsChoices.choices2[1]);
+      $('.choices .list-design-7').text(questionsChoices.choices2[2]);
+      $('.choices .list-design-8').text(questionsChoices.choices2[3]);
     }
-    $('.choices .list-design-1').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-5').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsThree();
       renderAnswersThree();
+      $('#questions2').hide();
+      $('#questions3').show();
 
 
     })
 
-    $('.choices .list-design-2').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-6').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsThree();
       renderAnswersThree();
+      $('#questions2').hide();
+      $('#questions3').show();
     })
 
-    $('.choices .list-design-3').on('click', function () {
+    $('.choices .list-design-7').on('click', function () {
       // secondsLeft = secondsLeft - 15;
       score++;
       renderQuestionsThree();
       renderAnswersThree();
-
+      $('#questions2').hide();
+      $('#questions3').show();
 
 
 
     })
 
-    $('.choices .list-design-4').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-8').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsThree();
       renderAnswersThree();
+      $('#questions2').hide();
+      $('#questions3').show();
+
 
     })
 
@@ -187,43 +235,51 @@ $(document).ready(function () {
 
   function renderAnswersThree() {
     for (let i = 0; i < questionsChoices.choices.length; i++) {
-      $('.choices .list-design-1').text(questionsChoices.choices3[0]);
-      $('.choices .list-design-2').text(questionsChoices.choices3[1]);
-      $('.choices .list-design-3').text(questionsChoices.choices3[2]);
-      $('.choices .list-design-4').text(questionsChoices.choices3[3]);
+      $('.choices .list-design-9').text(questionsChoices.choices3[0]);
+      $('.choices .list-design-10').text(questionsChoices.choices3[1]);
+      $('.choices .list-design-11').text(questionsChoices.choices3[2]);
+      $('.choices .list-design-12').text(questionsChoices.choices3[3]);
     }
-    $('.choices .list-design-1').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-9').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFour();
       renderAnswersFour();
+      $('#questions3').hide();
+      $('#questions4').show();
 
 
     })
 
-    $('.choices .list-design-2').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-10').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFour();
       renderAnswersFour();
+      $('#questions3').hide();
+      $('#questions4').show();
     })
 
-    $('.choices .list-design-3').on('click', function () {
+    $('.choices .list-design-11').on('click', function () {
       // secondsLeft = secondsLeft - 15;
       score++;
       renderQuestionsFour();
       renderAnswersFour();
+      $('#questions3').hide();
+      $('#questions4').show();
 
 
 
 
     })
 
-    $('.choices .list-design-4').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-12').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFour();
       renderAnswersFour();
+      $('#questions3').hide();
+      $('#questions4').show();
 
     })
 
@@ -232,43 +288,51 @@ $(document).ready(function () {
 
   function renderAnswersFour() {
     for (let i = 0; i < questionsChoices.choices.length; i++) {
-      $('.choices .list-design-1').text(questionsChoices.choices4[0]);
-      $('.choices .list-design-2').text(questionsChoices.choices4[1]);
-      $('.choices .list-design-3').text(questionsChoices.choices4[2]);
-      $('.choices .list-design-4').text(questionsChoices.choices4[3]);
+      $('.choices .list-design-13').text(questionsChoices.choices4[0]);
+      $('.choices .list-design-14').text(questionsChoices.choices4[1]);
+      $('.choices .list-design-15').text(questionsChoices.choices4[2]);
+      $('.choices .list-design-16').text(questionsChoices.choices4[3]);
     }
-    $('.choices .list-design-1').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-13').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFive();
       renderAnswersFive();
+      $('#questions4').hide();
+      $('#questions5').show();
 
 
     })
 
-    $('.choices .list-design-2').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-14').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFive();
       renderAnswersFive();
+      $('#questions4').hide();
+      $('#questions5').show();
     })
 
-    $('.choices .list-design-3').on('click', function () {
+    $('.choices .list-design-15').on('click', function () {
       // secondsLeft = secondsLeft - 15;
       score++;
       renderQuestionsFive();
       renderAnswersFive();
+      $('#questions4').hide();
+      $('#questions5').show();
 
 
 
 
     })
 
-    $('.choices .list-design-4').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-16').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       renderQuestionsFive();
       renderAnswersFive();
+      $('#questions4').hide();
+      $('#questions5').show();
 
     })
 
@@ -277,48 +341,45 @@ $(document).ready(function () {
 
   function renderAnswersFive() {
     for (let i = 0; i < questionsChoices.choices.length; i++) {
-      $('.choices .list-design-1').text(questionsChoices.choices5[0]);
-      $('.choices .list-design-2').text(questionsChoices.choices5[1]);
-      $('.choices .list-design-3').text(questionsChoices.choices5[2]);
-      $('.choices .list-design-4').text(questionsChoices.choices5[3]);
+      $('.choices .list-design-17').text(questionsChoices.choices5[0]);
+      $('.choices .list-design-18').text(questionsChoices.choices5[1]);
+      $('.choices .list-design-19').text(questionsChoices.choices5[2]);
+      $('.choices .list-design-20').text(questionsChoices.choices5[3]);
     }
-    $('.choices .list-design-1').on('click', function (event) {
+    $('.choices .list-design-17').on('click', function (event) {
 
-      // secondsLeft = secondsLeft - 15;
+      secondsLeft = secondsLeft - 15;
       score--;
       $('#game-over').show();
-      $('#questions').hide();
-      var initialHigh = localStorage.getItem('highscore');
-      if (score > initialHigh) {
-        localStorage.setItem('highscore', score);
-      }
+      $('#questions5').hide();
 
+      localStorage.setItem('high-score', score);
+      $('#score').text(localStorage.getItem('high-score'));
       stopTimer();
+      $('#button-restart').show();
 
     })
 
-    $('.choices .list-design-2').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-18').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       $('#game-over').show();
-      $('#questions').hide();
-      var initialHigh = localStorage.getItem('highscore');
-      if (score > initialHigh) {
-        localStorage.setItem('highscore', score);
-      }
+      $('#questions5').hide();
+      localStorage.setItem('high-score', score);
+      $('#score').text(localStorage.getItem('high-score'));
       stopTimer();
+      $('#button-restart').show();
     })
 
-    $('.choices .list-design-3').on('click', function () {
+    $('.choices .list-design-19').on('click', function () {
       // secondsLeft = secondsLeft - 15;
       score++;
       $('#game-over').show();
-      $('#questions').hide();
-      var initialHigh = localStorage.getItem('highscore');
-      if (score > initialHigh) {
-        localStorage.setItem('highscore', score);
-      }
+      $('#questions5').hide();
+      localStorage.setItem('high-score', score);
+      $('#score').text(localStorage.getItem('high-score'));
       stopTimer();
+      $('#button-restart').show();
 
 
 
@@ -326,17 +387,16 @@ $(document).ready(function () {
 
     })
 
-    $('.choices .list-design-4').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
+    $('.choices .list-design-20').on('click', function () {
+      secondsLeft = secondsLeft - 15;
       score--;
       $('#game-over').show();
-      $('#questions').hide();
-      var initialHigh = localStorage.getItem('highscore');
-      if (score > initialHigh) {
-        localStorage.setItem('highscore', score);
+      $('#questions5').hide();
 
-      }
+      localStorage.setItem('high-score', score);
+      $('#score').text(localStorage.getItem('high-score'));
       stopTimer();
+      $('#button-restart').show();
     })
 
 
@@ -346,42 +406,21 @@ $(document).ready(function () {
 
 
   $('#initial-form').on('submit', function (event) {
-    // event.preventDefault();
-    console.log('worked');
+
+
     event.preventDefault();
 
 
-    var inputValue = (this).value;
+    var inputValue = $('#initials').val();
     localStorage.setItem('initials', inputValue);
     (this).reset();
+    $('#stored-initials').text(localStorage.getItem('initials'));
+
   })
 
 
   $('#button-start').on("click", startQuiz);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  $('#button-restart').on("click", restartQuiz);
 
 
 });
