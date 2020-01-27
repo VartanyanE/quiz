@@ -4,8 +4,25 @@ $(document).ready(function () {
   var score = 0;
   var secondsLeft = 75;
   var timer = document.getElementById('timer');
+
+  //Audio files from freesound.org
+  var wrongSound = new Audio("./assets/142608__autistic-lucario__error.wav");
+  var rightSound = new Audio("./assets/476178__unadamlar__correct-choice.wav");
+
+
   $('#stored-initials').text(localStorage.getItem('initials'));
   $('#button-restart').hide();
+  $('#questions').hide();
+  $('#questions2').hide();
+  $('#questions3').hide();
+  $('#questions4').hide();
+  $('#questions5').hide();
+  $('#game-over').hide();
+
+
+
+  $('#button-start').on("click", startQuiz);
+  $('#button-restart').on("click", restartQuiz);
 
 
 
@@ -14,6 +31,10 @@ $(document).ready(function () {
     title: "Commonly used data types DO NOT include",
     choices: ["strings", "booleans", "alerts", "numbers"],
     answer: "alerts",
+
+    // title: "Who was the greatest of all time?",
+    // choices: ["Kobe", "Kobe", "Kobe", "Kobe"],
+    // answer: "Kobe",
 
     title2: "The condition in an if / else statement is enclosed within ____.",
     choices2: ["quotes", "curly brackets", "parentheses", "square brackets"],
@@ -32,12 +53,16 @@ $(document).ready(function () {
     answer5: "<style>",
   };
 
-  $('#questions').hide();
-  $('#questions2').hide();
-  $('#questions3').hide();
-  $('#questions4').hide();
-  $('#questions5').hide();
-  $('#game-over').hide();
+  function wrongPlay() {
+    wrongSound.play();
+
+  }
+
+
+  function rightPlay() {
+    rightSound.play();
+
+  }
 
   function stopTimer() {
     clearInterval(interval);
@@ -55,6 +80,7 @@ $(document).ready(function () {
       timer.textContent = secondsLeft;
       if (secondsLeft <= 0) {
         clearInterval(interval);
+        $('#score').text(score);
         $('#questions').hide();
         $('#questions2').hide();
         $('#questions3').hide();
@@ -65,7 +91,7 @@ $(document).ready(function () {
 
 
       }
-      // $('#timer').show();
+
     }, 1000);
 
   }
@@ -80,6 +106,7 @@ $(document).ready(function () {
     $('#questions').show();
 
 
+
     renderQuestions();
     renderAnswers();
   }
@@ -92,10 +119,15 @@ $(document).ready(function () {
     $('#questions').show();
     $('#game-over').hide();
 
+    location.reload();
+
+
 
     renderQuestions();
     renderAnswers();
   }
+
+
 
   function renderQuestions() {
     $('#question').html('<h3>' + questionsChoices.title + '<h3>');
@@ -136,11 +168,13 @@ $(document).ready(function () {
 
     $('.choices .list-design-1').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsTwo();
       renderAnswersTwo();
       $('#questions').hide();
       $('#questions2').show();
+      wrongPlay();
+
 
 
 
@@ -151,31 +185,34 @@ $(document).ready(function () {
 
     $('.choices .list-design-2').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsTwo();
       renderAnswersTwo();
       $('#questions').hide();
       $('#questions2').show();
+      wrongPlay();
     })
 
     $('.choices .list-design-3').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      score++;
+      score = score + 5;
       renderQuestionsTwo();
       renderAnswersTwo();
       $('#questions').hide();
       $('#questions2').show();
+      rightPlay();
 
 
     })
 
     $('.choices .list-design-4').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsTwo();
       renderAnswersTwo();
       $('#questions').hide();
       $('#questions2').show();
+      wrongPlay();
     })
 
 
@@ -189,31 +226,34 @@ $(document).ready(function () {
     }
     $('.choices .list-design-5').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsThree();
       renderAnswersThree();
       $('#questions2').hide();
       $('#questions3').show();
+      wrongPlay();
 
 
     })
 
     $('.choices .list-design-6').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsThree();
       renderAnswersThree();
       $('#questions2').hide();
       $('#questions3').show();
+      wrongPlay();
     })
 
     $('.choices .list-design-7').on('click', function () {
       // secondsLeft = secondsLeft - 15;
-      score++;
+      score = score + 5;
       renderQuestionsThree();
       renderAnswersThree();
       $('#questions2').hide();
       $('#questions3').show();
+      rightPlay();
 
 
 
@@ -221,11 +261,12 @@ $(document).ready(function () {
 
     $('.choices .list-design-8').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsThree();
       renderAnswersThree();
       $('#questions2').hide();
       $('#questions3').show();
+      wrongPlay();
 
 
     })
@@ -242,31 +283,34 @@ $(document).ready(function () {
     }
     $('.choices .list-design-9').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsFour();
       renderAnswersFour();
       $('#questions3').hide();
       $('#questions4').show();
+      wrongPlay();
 
 
     })
 
     $('.choices .list-design-10').on('click', function () {
-      secondsLeft = secondsLeft - 15;
-      score--;
+      // secondsLeft = secondsLeft - 15;
+      score = score + 5;
       renderQuestionsFour();
       renderAnswersFour();
       $('#questions3').hide();
       $('#questions4').show();
+      rightPlay();
     })
 
     $('.choices .list-design-11').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
-      score++;
+      secondsLeft = secondsLeft - 15;
+      // score--;
       renderQuestionsFour();
       renderAnswersFour();
       $('#questions3').hide();
       $('#questions4').show();
+      wrongPlay();
 
 
 
@@ -275,11 +319,12 @@ $(document).ready(function () {
 
     $('.choices .list-design-12').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsFour();
       renderAnswersFour();
       $('#questions3').hide();
       $('#questions4').show();
+      wrongPlay();
 
     })
 
@@ -294,32 +339,35 @@ $(document).ready(function () {
       $('.choices .list-design-16').text(questionsChoices.choices4[3]);
     }
     $('.choices .list-design-13').on('click', function () {
-      secondsLeft = secondsLeft - 15;
-      score--;
+      // secondsLeft = secondsLeft - 15;
+      score = score + 5;
       renderQuestionsFive();
       renderAnswersFive();
       $('#questions4').hide();
       $('#questions5').show();
+      rightPlay();
 
 
     })
 
     $('.choices .list-design-14').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsFive();
       renderAnswersFive();
       $('#questions4').hide();
       $('#questions5').show();
+      wrongPlay();
     })
 
     $('.choices .list-design-15').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
-      score++;
+      secondsLeft = secondsLeft - 15;
+      // score--;
       renderQuestionsFive();
       renderAnswersFive();
       $('#questions4').hide();
       $('#questions5').show();
+      wrongPlay();
 
 
 
@@ -328,11 +376,12 @@ $(document).ready(function () {
 
     $('.choices .list-design-16').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       renderQuestionsFive();
       renderAnswersFive();
       $('#questions4').hide();
       $('#questions5').show();
+      wrongPlay();
 
     })
 
@@ -349,37 +398,42 @@ $(document).ready(function () {
     $('.choices .list-design-17').on('click', function (event) {
 
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       $('#game-over').show();
       $('#questions5').hide();
+      wrongPlay();
 
-      localStorage.setItem('high-score', score);
-      $('#score').text(localStorage.getItem('high-score'));
+      localStorage.setItem('score', score);
+      $('#score').text(localStorage.getItem('score'));
       stopTimer();
       $('#button-restart').show();
+
 
     })
 
     $('.choices .list-design-18').on('click', function () {
-      secondsLeft = secondsLeft - 15;
-      score--;
+      // secondsLeft = secondsLeft - 15;
+      score = score + 5;
       $('#game-over').show();
       $('#questions5').hide();
-      localStorage.setItem('high-score', score);
-      $('#score').text(localStorage.getItem('high-score'));
+      localStorage.setItem('score', score);
+      $('#score').text(localStorage.getItem('score'));
       stopTimer();
       $('#button-restart').show();
+      rightPlay();
+
     })
 
     $('.choices .list-design-19').on('click', function () {
-      // secondsLeft = secondsLeft - 15;
-      score++;
+      secondsLeft = secondsLeft - 15;
+      // score--;
       $('#game-over').show();
       $('#questions5').hide();
-      localStorage.setItem('high-score', score);
-      $('#score').text(localStorage.getItem('high-score'));
+      localStorage.setItem('score', score);
+      $('#score').text(localStorage.getItem('score'));
       stopTimer();
       $('#button-restart').show();
+      wrongPlay();
 
 
 
@@ -389,14 +443,16 @@ $(document).ready(function () {
 
     $('.choices .list-design-20').on('click', function () {
       secondsLeft = secondsLeft - 15;
-      score--;
+      // score--;
       $('#game-over').show();
       $('#questions5').hide();
+      wrongPlay();
 
-      localStorage.setItem('high-score', score);
-      $('#score').text(localStorage.getItem('high-score'));
+      localStorage.setItem('score', score);
+      $('#score').text(localStorage.getItem('score'));
       stopTimer();
       $('#button-restart').show();
+
     })
 
 
@@ -406,11 +462,7 @@ $(document).ready(function () {
 
 
   $('#initial-form').on('submit', function (event) {
-
-
     event.preventDefault();
-
-
     var inputValue = $('#initials').val();
     localStorage.setItem('initials', inputValue);
     (this).reset();
@@ -419,8 +471,7 @@ $(document).ready(function () {
   })
 
 
-  $('#button-start').on("click", startQuiz);
-  $('#button-restart').on("click", restartQuiz);
+
 
 
 });
