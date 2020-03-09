@@ -1,11 +1,62 @@
-# quiz
 
 
-This is a simple quiz app, made by html/css/javascipt/jquery.  
+# Quiz 
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+
+## Description
+
+This is a coding quiz app.  TEST YOUR SKILLS!
 
 
-INSTRUCTIONS
+## Table of Contents
 
-It is 5 multiple choice questions, for every question that you answer correctly you will receive 5 points.  For every incorrect answer 15 seconds will be deducted from the timer.  The quiz is done once all questions are answered or when time has run out.
+* [Installation](#Installation) 
 
-The audio files that play when you choose a correct or incorrect answer are from freesound.org.
+* [Usage](#Usage) 
+
+* [License](#License) 
+
+* [Contributing](#Contributing) 
+
+* [Tests](#Tests)
+
+* [Questions](#Questions)
+
+## Installation
+
+To install necessary dependencies, run the following command.
+
+
+    No dependencies
+
+## Usage
+
+
+
+## License
+
+    
+None
+
+## Contributing
+
+
+
+## Tests
+
+To perform a test, run the following command:
+
+    No tests
+    
+    
+## Questions
+
+
+<img src="https://avatars1.githubusercontent.com/u/15513093?v=4" alt="avatar" style="border-radius: 16px" width="30"/>
+
+
+
+
+
+If you have any questions please contact vartanyanE directly at https://vartanyane.github.io/portfolioFinal/
